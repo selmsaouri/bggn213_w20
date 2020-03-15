@@ -1,0 +1,109 @@
+---
+title: "Structural Bioinformatics (pt. 1)"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## PDB Statistics 
+
+```{r}
+stats <- read.csv("Data Export Summary.csv", row.names=1)
+stats
+```
+
+```{r}
+ans <- round(stats$Total/sum(stats$Total)*100, 2)
+names(ans) <- rownames(stats)
+ans
+```
+
+> Q: What proportion of structures in the PDB are protein?
+
+```{r}
+protein <- round(sum(stats$Proteins)/sum(stats$Total)*100, 2)
+protein
+```
+
+## 2. Using bio3d to analyze protein structure data
+
+Use bio3d package from CRAN. 
+
+```{r}
+library(bio3d)
+
+pdb <- read.pdb("1hsg")
+pdb
+```
+
+```{r}
+aa <- get.seq("1ake_A")
+aa
+```
+
+Download the following through the console (not the Rmd): 
+install.packages("bio3d")
+install.packages("ggplot2")
+install.packages("ggrepel")
+install.packages("devtools")
+install.packages("BiocManager")
+
+BiocManager::install("msa")
+devtools::install_bitbucket("Grantlab/bio3d-view")
+
+```{r}
+hits <- NULL
+hits$pdb.id <- c('1AKE_A','4X8M_A','6S36_A','6RZE_A','4X8H_A','3HPR_A',
+                 '1E4V_A','5EJE_A','1E4Y_A','3X2S_A','6HAP_A','6HAM_A',
+                 '4K46_A','4NP6_A','3GMT_A','4PZL_A')
+
+hits
+```
+
+# download and parse these structures
+# ADK --> BLAST PDB --> ALL ADK STRUCTURES 
+
+Download related PDB files
+```{r}
+library(bio3d)
+files <- get.pdb(hits$pdb.id, path="pdbs", split=TRUE, gzip=TRUE)
+```
+
+Align and superpose structures
+```{r}
+pdbs <- pdbaln(files, fit=TRUE, exefile="msa")
+```
+
+```{r}
+library(rgl)
+library(bio3d.view)
+view(pdbs)
+```
+
+```{r}
+rglwidget(elementId = "tmp")
+ids <- basename.pdb(pdbs$id)
+```
+
+```{r}
+pc <- pca(pdbs)
+plot(pc)
+```
+
+```{r}
+plot(pc, 1:2)
+dim(pc$U)
+```
+
+make a PCA trajectory 
+```{r}
+pc1 <- mktrj()
+```
+
+
+
+
+
+
