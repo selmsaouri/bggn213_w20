@@ -8,4 +8,5 @@ Class 06:
 Class 07:
 Class 08:
 Class 09: Machine Learning pt. 1
-Class 10: Some title
+Class 10: Some title 
+
