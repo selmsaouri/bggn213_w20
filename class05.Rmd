@@ -1,0 +1,76 @@
+---
+title: "Lecture 05:Data visualization and graphics in R"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+plot(1:5, col="blue", typ="o")
+```
+
+```{r}
+baby <- read.table("bimm143_05_rstats/weight_chart.txt")
+```
+
+```{r}
+View(baby)
+```
+
+```{r}
+baby <- read.table("bimm143_05_rstats/weight_chart.txt", 
+                   header = TRUE)
+```
+
+```{r}
+plot(baby$Age, baby$Weight, col="pink", typ="o", 
+     xlab= "Age (months)", ylab= "Weight (kg)",
+     ylim= c(2,10), main="Baby Weight vs. Age",
+     lwd=2, pch=15, cex=1.5)
+```
+
+#?plot
+
+```{r}
+plot(1:5, pch=1:5, cex=1:5, col=1:5)
+```
+
+```{r}
+mouse <- read.table("bimm143_05_rstats/feature_counts.txt", 
+                             header = TRUE, sep = "\t")
+```
+
+```{r}
+dotchart(mouse$Count)
+```
+
+#?par()$mar
+
+#?barplot
+```{r}
+par(mar=c(5.1, 12.1, 4.1, 2.1))
+barplot(mouse$Count, horiz = TRUE, ylab="", names.arg = mouse$Feature, 
+        main="Mouse GRCm38 Genome Features", las=1, xlim=c(0,80000))
+```
+
+```{r}
+mf <- read.delim("bimm143_05_rstats/male_female_counts.txt")
+barplot(mf$Count, names.arg = mf$Sample, col=rainbow(10))
+```
+
+```{r}
+rainbow(10)
+```
+
+```{r}
+mf <- read.delim("bimm143_05_rstats/male_female_counts.txt")
+barplot(mf$Count, names.arg = mf$Sample, col=c("lightblue", "pink"), las=2)
+```
+
+```{r}
+barplot(mf$Count, names.arg=mf$Sample, col=rainbow(nrow(mf)))
+```
+
+
