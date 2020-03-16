@@ -20,7 +20,7 @@ Class 11:
 
 Class 12: [Structural Bioinformatics pt. 1](https://github.com/selmsaouri/bggn213_w20/blob/master/Lecture12/class12.md)
 
-Class 13: 
+Class 13: [Bioinformatics in Drug Discovery and Design](https://github.com/selmsaouri/bggn213_w20/blob/master/class13/class13.md)
 
 Class 14: 
 
