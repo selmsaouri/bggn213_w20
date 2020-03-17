@@ -1,0 +1,96 @@
+---
+title: "Network_Analysis_Oceans"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+source("https://bioconductor.org/biocLite.R")
+biocLite("RCy3")
+```
+
+
+```{r}
+##Calling Libraries Previously intalled via Console
+library(RCy3)
+library(igraph)
+library(RColorBrewer)
+##Check that R is connected to Cytoscape
+cytoscapePing()
+cytoscapeVersionInfo()
+```
+
+#Make simple demo graph
+```{r}
+g <- makeSimpleIgraph()
+createNetworkFromIgraph(g,"myGraph")
+fig <- exportImage(filename="demo", type="png", height=350)
+knitr::include_graphics("./demo.png")
+#Changing the style of the above Graph
+setVisualStyle("Marquee")
+fig <- exportImage(filename="demo_marquee", type="png", height=350)
+knitr::include_graphics("./demo_marquee.png")
+##What other styles are there?
+styles <- getVisualStyleNames()
+styles
+plot(g)
+```
+
+## Reading in Metagenomics Data
+We will read in a species co-occurrence matrix that was calculated using Spearman Rank coefficient. (see reference Lima-Mendez et al. (2015) for details).
+
+```{r}
+## scripts for processing located in "inst/data-raw/"
+prok_vir_cor <- read.delim("virus_prok_cor_abundant.tsv", stringsAsFactors = FALSE)
+## Have a peak at the first 6 rows
+head(prok_vir_cor)
+```
+#Format data frame to be compatible with Ctyoscape
+```{r}
+new_g <- graph.data.frame(prok_vir_cor, directed = FALSE)
+new_g
+```
+
+```{r}
+plot(new_g)
+plot(new_g, vertex.label=NA)
+plot(new_g, vertex.size=3,vertex.label=NA)
+```
+`
+## Clustering Networks Community detection
+
+```{r}
+cb <- cluster_edge_betweenness(new_g)
+plot(cb, y=new_g, vertex.label=NA,  vertex.size=3)
+```
+```{r}
+head( membership(cb) )
+# Calculate and plot node degree of our network
+d <- degree(new_g)
+hist(d, breaks=30, col="lightblue", main ="Node Degree Distribution")
+plot( degree_distribution(new_g), type="h" )
+```
+
+##Centrality analysis
+Centrality gives an estimation on how important a node or edge is for the connectivity (or the information flow) of a network. It is a particularly useful parameter in signaling networks and it is often used when trying to find drug targets for example.
+
+Centrality analysis often aims to answer the following question: Which nodes are the most important and why?
+
+One centrality method that you can often find in publications is the Google PageRank score. For the explanation of the PageRank algorithm, see the following webpage: http://infolab.stanford.edu/~backrub/google.html
+
+```{r}
+library(BBmisc)
+pr <- page_rank(new_g)
+head(pr$vector)
+# Make a size vector btwn 2 and 20 for node plotting size
+v.size <- BBmisc::normalize(pr$vector, range=c(2,20), method="range")
+plot(new_g, vertex.size=v.size, vertex.label=NA)
+v.size <- BBmisc::normalize(d, range=c(2,20), method="range")
+plot(new_g, vertex.size=v.size, vertex.label=NA)
+b <- betweenness(new_g)
+v.size <- BBmisc::normalize(b, range=c(2,20), method="range")
+plot(new_g, vertex.size=v.size, vertex.label=NA)
+```
