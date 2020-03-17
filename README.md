@@ -8,8 +8,7 @@ Class 05: [Data Visualization and Graphics in R](https://github.com/selmsaouri/b
 Class 06:[Why, when and how of writing your own R functions](https://github.com/selmsaouri/bggn213_w20/blob/master/Lecture06/class06.md)
 
 Class 09: [Machine Learning pt. 1](https://github.com/selmsaouri/bggn213_w20/blob/master/Lecture09/class09.md)
-
-          [Bonus: UK Foods Example](https://github.com/selmsaouri/bggn213_w20/blob/master/Lecture09/UK-foods.md)
+[Bonus: UK Foods Example](https://github.com/selmsaouri/bggn213_w20/blob/master/Lecture09/UK-foods.md)
 
 Class 10: [Machine Learning pt. 2](https://github.com/selmsaouri/bggn213_w20/blob/master/Lecture10/class10.md)
 
@@ -19,8 +18,9 @@ Class 13: [Bioinformatics in Drug Discovery and Design](https://github.com/selms
 
 Class 14: [Genome informatics and high throughput sequencing (Part 1)](https://github.com/selmsaouri/bggn213_w20/blob/master/class14/class14.md)
 
-Class 15: Transcriptomics and the analysis of RNA-Seq data 
+Class 15: [Transcriptomics and the analysis of RNA-Seq data](https://github.com/selmsaouri/bggn213_w20/blob/master/class15/class15.md) 
 
-Class 16: Genome annotation and the interpretation of gene lists 
+Class 16: [Genome annotation and the interpretation of gene lists](https://github.com/selmsaouri/bggn213_w20/blob/master/class16/class16.rmd) 
 
-Class 17: Biological network analysis 
+Class 17: [Biological network analysis](https://github.com/selmsaouri/bggn213_w20/blob/master/class17/networks.Rmd)
+[Bonus: Coronavirus Tracking](https://github.com/selmsaouri/bggn213_w20/blob/master/class17/corona.md)
