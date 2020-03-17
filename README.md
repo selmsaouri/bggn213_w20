@@ -1,4 +1,4 @@
-# bggn213_w20
+# Foundations of Bioinformatics: BGGN213 Winter 2020
 
 This is my classwork from [BGGN-213](https://bioboot.github.io/bggn213_W20/) at UC San Diego.
 
